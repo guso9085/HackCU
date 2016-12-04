@@ -249,7 +249,7 @@ def main():
     size = [SCREEN_WIDTH, SCREEN_HEIGHT]
     screen = pygame.display.set_mode(size)
 
-    pygame.display.set_caption("Rüfüs")
+    pygame.display.set_caption("Cube Runner")
 
     player = Player()
 
