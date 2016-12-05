@@ -246,6 +246,7 @@ class Level_01(Level):
             self.platform_list.add(block)
 
 def main():
+    File = "scores.txt"
     pygame.init()
 
     #Size
@@ -321,6 +322,11 @@ def main():
         clock.tick(60)
 
         pygame.display.flip()
+    myFile = open(File, rw)
+    for line in myFile
+        if line == "\n":
+            myFile.write(str(int(player.score)))
+        else:
 
     print("Your score is " + str(int(player.score)))
     pygame.quit()
