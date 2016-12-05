@@ -23,6 +23,8 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.Surface([width, height])
         self.image.fill((52, 73, 94))
 
+        self.score = 0
+
         self.rect = self.image.get_rect()
 
         self.change_x = 0
@@ -57,6 +59,7 @@ class Player(pygame.sprite.Sprite):
 
         block_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
         for block in block_hit_list:
+            self.score = self.score + 1*(pygame.time.get_ticks()/5000.0)
             block.image.fill((randint(0,255), randint(0,255), randint(0,255)))
             if self.change_y > 0:
                 self.rect.bottom = block.rect.top
@@ -211,7 +214,7 @@ class Level_01(Level):
         level = []
         offset = 3210
         for i in range(10):
-            level.append([210, 40, 500 + (i * offset) , randint(150,560)])
+            level.append([210, 40, 500 + (i * offset), randint(150,560)])
             level.append([210, 40, 750 + (i * offset), randint(150,560)])
             level.append([210, 40, 1000 + (i * offset), randint(150,560)])
             level.append([210, 40, 1250 + (i * offset), randint(150,560)])
@@ -319,6 +322,7 @@ def main():
 
         pygame.display.flip()
 
+    print("Your score is " + str(int(player.score)))
     pygame.quit()
 
 if __name__ == "__main__":
