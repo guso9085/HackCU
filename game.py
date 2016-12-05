@@ -248,6 +248,7 @@ class Level_01(Level):
 def main():
     File = "scores.txt"
     pygame.init()
+    highscore = 0
 
     #Size
     size = [SCREEN_WIDTH, SCREEN_HEIGHT]
@@ -322,13 +323,17 @@ def main():
         clock.tick(60)
 
         pygame.display.flip()
-    myFile = open(File, rw)
-    for line in myFile
-        if line == "\n":
-            myFile.write(str(int(player.score)))
-        else:
 
-    print("Your score is " + str(int(player.score)))
+    myFile = open(File, "a")
+    myFile.write(str(int(player.score))+ "\n")
+
+    myFile = open(File, "r")
+    for line in myFile:
+        if int(line) > highscore:
+            highscore = int(line)
+
+    print("SCORE: " + str(int(player.score)))
+    print("HIGHSCORE: " + str(highscore))
     pygame.quit()
 
 if __name__ == "__main__":
