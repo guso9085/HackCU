@@ -47,7 +47,7 @@ class Player(pygame.sprite.Sprite):                         #FIRST CLASS: PLAYER
         self.change_y = 0
         self.level = None
 
-    def update(self):                                        #FIRST METHOD: PLAYER MOVEMENT
+    def update(self):                                       #FIRST METHOD: PLAYER MOVEMENT
         self.grav()
         self.rect.x += self.change_x
         block_hit_list = pygame.sprite.spritecollide(self, self.level.platform_list, False)
@@ -76,7 +76,7 @@ class Player(pygame.sprite.Sprite):                         #FIRST CLASS: PLAYER
                 self.rect.top = block.rect.bottom
             self.change_y = 0
 
-    def grav(self):                                    #SECOND METHOD: GRAVITY
+    def grav(self):                                         #SECOND METHOD: GRAVITY
         if self.change_y == 0:
             self.change_y = 1
         else:                                               #IF + ELSE STATEMENT
@@ -92,10 +92,10 @@ class Player(pygame.sprite.Sprite):                         #FIRST CLASS: PLAYER
         if len(platform_hit_list) > 0 or self.rect.bottom >= SCREEN_HEIGHT:
             self.change_y = -17
 
-    def left(self):                                      #FOURTH METHOD: LEFT
+    def left(self):                                         #FOURTH METHOD: LEFT
         self.change_x = -6 - (pygame.time.get_ticks()/3000.0)
 
-    def right(self):                                     #FIFTH METHOD: RIGHT
+    def right(self):                                        #FIFTH METHOD: RIGHT
         self.change_x = 6 + (pygame.time.get_ticks()/3000.0)
 
     def stop(self):                                         #SIXTH METHOD: STOP
@@ -180,7 +180,7 @@ class Level():                                              #SIXTH CLASS: LEVEL
         self.light_list.draw(screen)
         self.scorebox_list.draw(screen)
 
-    def shifty(self, shift_x):                         #THIRD METHOD: SHIFTING WORLD AND OBJECTS
+    def shifty(self, shift_x):                              #THIRD METHOD: SHIFTING WORLD AND OBJECTS
         self.world_shift += shift_x
         for platform in self.platform_list:                 #FOR LOOP
             platform.rect.x += shift_x
@@ -188,7 +188,7 @@ class Level():                                              #SIXTH CLASS: LEVEL
             enemy.rect.x += shift_x
 
 
-class MLevel(Level):                                      #THIRD CLASS: MAIN LEVEL
+class MLevel(Level):                                        #THIRD CLASS: MAIN LEVEL
     def __init__(self, player):
         Level.__init__(self, player)
         self.level_limit = -1000
@@ -258,18 +258,17 @@ def main():
     done = False
     clock = pygame.time.Clock()
 
-    try:                                                        #TRY AND EXCEPT
-        myFile = open(File, "r")                                #FILE IO, READING
+    try:                                                    #TRY AND EXCEPT
+        myFile = open(File, "r")                            #FILE IO, READING
         for line in myFile:
             split = line.split("|")
             if int(split[1]) > highscore:
                 highscore = int(split[1])
     except:
-        print("Error")
+        print(bcolors.FAIL + "Error" + bcolors.ENDC)
 
     frame_count = 0
     frame_rate = 60
-    #start_time = 90
 
     font = pygame.font.Font(None, 60)
 
@@ -295,7 +294,6 @@ def main():
         active_sprite_list.update()
         current_level.update()
 
-        #Constant Scrolling
         diff = 7 + (pygame.time.get_ticks()/3000.0)
         current_level.shifty(-diff)
 
@@ -342,10 +340,10 @@ def main():
     highscores = []
 
     myFile = open(File, "r")
-    try:                                #FILE IO, READING
+    try:                                                    #FILE IO, READING
         for line in myFile:
             split = line.split("|")
-            if int(split[1]) in Library:                        #LIBRARY W/ COMPLEX OBJECT
+            if int(split[1]) in Library:                    #LIBRARY W/ COMPLEX OBJECT
                 Library[int(split[1])].append(str(split[0]))
             else:
                 Library[int(split[1])] = [str(split[0])]
@@ -355,11 +353,6 @@ def main():
 
     highscores.sort(reverse=True)
 
-    #colored('hello', 'red'), colored('world', 'green')
-
-    #print(bcolors.WARNING + "Warning: No active frommets remain. Continue?" + bcolors.ENDC)
-
-    #print(bcolors.WARNING + "SCORE: " + str(int(player.score)) + bcolors.ENDC)
     print(bcolors.BOLD + "TOP 5 SCORES" + bcolors.ENDC)
     print(bcolors.HEADER + "1] " + str(Library[highscores[0]]) + " scored " + bcolors.BOLD + str(highscores[0]) + bcolors.ENDC)
     print(bcolors.OKBLUE + "2] " + str(Library[highscores[1]]) + " scored " + bcolors.BOLD + str(highscores[1]) + bcolors.ENDC)
