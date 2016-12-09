@@ -341,15 +341,17 @@ def main():
     Library = {}
     highscores = []
 
-    myFile = open(File, "r")                                #FILE IO, READING
-    for line in myFile:
-        split = line.split("|")
-        if int(split[1]) in Library:                        #LIBRARY W/ COMPLEX OBJECT
-            Library[int(split[1])].append(str(split[0]))
-        else:
-            Library[int(split[1])] = [str(split[0])]
-        #print(str(Library[int(split[1])]))
-        highscores.append(int(split[1]))
+    myFile = open(File, "r")
+    try:                                #FILE IO, READING
+        for line in myFile:
+            split = line.split("|")
+            if int(split[1]) in Library:                        #LIBRARY W/ COMPLEX OBJECT
+                Library[int(split[1])].append(str(split[0]))
+            else:
+                Library[int(split[1])] = [str(split[0])]
+                highscores.append(int(split[1]))
+    except:
+        print(bcolors.FAIL + "ERROR" + bcolors.ENDC)
 
     highscores.sort(reverse=True)
 
