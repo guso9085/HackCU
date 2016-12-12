@@ -4,6 +4,8 @@
 
 #USED PROGRAMARCADEGAMES.COM TO HELP UNDERSTAND PYGAME SYNTAX AND GET A GOOD START
 
+#COMMENTS ON RIGHT POINTING TO MEETING PROJECT REQUIREMENTS
+
 import pygame                                              #IMPORT LIBRARY
 from random import randint
 #import sys
@@ -60,7 +62,7 @@ class Player(pygame.sprite.Sprite):                         #FIRST CLASS: PLAYER
         block_hit_list = pygame.sprite.spritecollide(self, self.level.light_list, False)
         for block in block_hit_list:
             if self.change_x >= 0:
-                self.rect.right = block.rect.left
+                self.rect.right = block.rect.left           #ELSE IF STATEMENT
             elif self.change_x <= 0:
 
                 self.rect.left = block.rect.rights
@@ -231,10 +233,11 @@ def main():
         answer = input("Would you like to enter a name for your score? (Y/N) : ")
         if answer == 'Y':
             answer = input("Name: ")
+            print("Have fun " + answer)
             boom = True
         elif answer == 'N':
-            print("Bye Bye")
-            answer = "Unknown"
+            print("Have fun")
+            answer = "Anonymous"
             boom = True
         elif answer != 'X' or answer != 'Y':
             print("Invalid input")
@@ -336,7 +339,7 @@ def main():
     myFile.write(answer + "|")
     myFile.write(str(int(player.score))+ "\n")
 
-    Library = {}
+    Library = {}                                            #LIBRARY
     highscores = []
 
     myFile = open(File, "r")
